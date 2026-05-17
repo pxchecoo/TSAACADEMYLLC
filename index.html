@@ -191,6 +191,9 @@
     }
 
     .coming-soon-note {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       max-width: 420px;
       margin: 22px auto 0;
       padding: 14px 20px;
@@ -198,7 +201,23 @@
       border: 1px solid rgba(244, 182, 64, 0.28);
       background: rgba(255, 255, 255, 0.04);
       color: rgba(255, 255, 255, 0.88);
+      font-family: "Sora", system-ui, sans-serif;
+      font-size: 0.95rem;
       font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .coming-soon-note:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(244, 182, 64, 0.44);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .coming-soon-note:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     .coming-soon-rail {
@@ -256,22 +275,21 @@
     .brand-mark {
       display: grid;
       place-items: center;
-      width: 84px;
-      height: 56px;
-      padding: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.94);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      width: 42px;
+      height: 42px;
+      border: 2px solid currentColor;
+      border-radius: var(--radius);
+      font-family: "Sora", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: var(--gold);
+      background: rgba(255, 255, 255, 0.12);
     }
 
-    .brand-mark img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 10px;
+    .site-nav.scrolled .brand-mark,
+    .site-nav.menu-open .brand-mark {
+      color: var(--navy);
+      background: var(--blue-soft);
     }
 
     .brand-text {
@@ -1057,8 +1075,8 @@
       }
 
       .brand-mark {
-        width: 72px;
-        height: 48px;
+        width: 38px;
+        height: 38px;
       }
 
       .hero h1 {
@@ -1079,7 +1097,7 @@
       <span class="coming-soon-mark">Tampa Success Academy LLC</span>
       <h1 class="coming-soon-title">COMING <span>SOON!</span></h1>
       <p class="coming-soon-sub">Big things are on the way. Tampa Success Academy is preparing to open soon.</p>
-      <div class="coming-soon-note">Empowering today's students to lead tomorrow.</div>
+      <button class="coming-soon-note" id="openSiteButton" type="button">Empowering today's students to lead tomorrow.</button>
       <div class="coming-soon-rail" aria-label="Coming soon highlights">
         <div class="coming-soon-pill">Academic<br />Excellence</div>
         <div class="coming-soon-pill">Student<br />Growth</div>
@@ -1089,7 +1107,7 @@
   </section>
   <header class="site-nav" id="navbar">
     <a class="brand" href="#inicio" aria-label="Tampa Success Academy LLC">
-      <span class="brand-mark"><img src="assets/banner-logo.jpg" alt="Tampa Success Academy logo" /></span>
+      <span class="brand-mark">TSA</span>
       <span class="brand-text">
         <span class="brand-title">Tampa Success Academy</span>
         <span class="brand-sub">Academic Support for Online Students</span>
@@ -1361,6 +1379,7 @@
     const navbar = document.getElementById("navbar");
     const menuToggle = document.getElementById("menuToggle");
     const mobileMenu = document.getElementById("mobileMenu");
+    const openSiteButton = document.getElementById("openSiteButton");
 
     function syncNav() {
       navbar.classList.toggle("scrolled", window.scrollY > 30);
@@ -1374,8 +1393,20 @@
       document.body.style.overflow = "";
     }
 
+    function revealFullSite() {
+      document.body.classList.remove("coming-soon-active");
+      document.body.style.overflow = "";
+      closeMenu();
+      syncNav();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     window.addEventListener("scroll", syncNav);
     syncNav();
+
+    if (openSiteButton) {
+      openSiteButton.addEventListener("click", revealFullSite);
+    }
 
     menuToggle.addEventListener("click", () => {
       const isOpen = mobileMenu.classList.toggle("open");
