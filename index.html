@@ -51,6 +51,10 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    body.coming-soon-active {
+      background: #071a30;
+    }
+
     img {
       display: block;
       max-width: 100%;
@@ -76,6 +80,145 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
+    }
+
+    .coming-soon-screen {
+      display: none;
+      min-height: 100svh;
+      padding: 28px;
+      background:
+        radial-gradient(circle at top left, rgba(47, 111, 181, 0.32) 0%, transparent 34%),
+        radial-gradient(circle at bottom right, rgba(244, 182, 64, 0.2) 0%, transparent 32%),
+        linear-gradient(180deg, #081a32 0%, #061326 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .coming-soon-screen::before,
+    .coming-soon-screen::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: -1;
+    }
+
+    .coming-soon-screen::before {
+      width: 420px;
+      height: 420px;
+      top: -120px;
+      right: -90px;
+      background: radial-gradient(circle, rgba(244, 182, 64, 0.7) 0%, transparent 70%);
+    }
+
+    .coming-soon-screen::after {
+      width: 360px;
+      height: 360px;
+      left: -90px;
+      bottom: -120px;
+      background: radial-gradient(circle, rgba(47, 111, 181, 0.7) 0%, transparent 70%);
+    }
+
+    body.coming-soon-active .coming-soon-screen {
+      display: grid;
+      place-items: center;
+    }
+
+    body.coming-soon-active .site-nav,
+    body.coming-soon-active main,
+    body.coming-soon-active footer {
+      display: none;
+    }
+
+    .coming-soon-panel {
+      width: min(100%, 760px);
+      padding: clamp(28px, 5vw, 54px);
+      border: 1px solid rgba(244, 182, 64, 0.28);
+      border-radius: 24px;
+      background:
+        linear-gradient(180deg, rgba(17, 44, 78, 0.88) 0%, rgba(8, 23, 45, 0.94) 100%);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      text-align: center;
+      position: relative;
+    }
+
+    .coming-soon-logo {
+      width: min(100%, 500px);
+      margin: 0 auto 28px;
+      padding: 10px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .coming-soon-logo img {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .coming-soon-mark {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .coming-soon-title {
+      font-family: "Sora", system-ui, sans-serif;
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 800;
+      line-height: 0.94;
+    }
+
+    .coming-soon-title span {
+      display: block;
+      color: var(--gold);
+    }
+
+    .coming-soon-sub {
+      max-width: 560px;
+      margin: 18px auto 0;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.02rem;
+      line-height: 1.8;
+    }
+
+    .coming-soon-note {
+      max-width: 420px;
+      margin: 22px auto 0;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 182, 64, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 700;
+    }
+
+    .coming-soon-rail {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .coming-soon-pill {
+      min-height: 64px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.88);
+      font-family: "Sora", system-ui, sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      line-height: 1.45;
     }
 
     .site-nav {
@@ -113,21 +256,22 @@
     .brand-mark {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      border: 2px solid currentColor;
-      border-radius: var(--radius);
-      font-family: "Sora", system-ui, sans-serif;
-      font-weight: 800;
-      font-size: 0.88rem;
-      color: var(--gold);
-      background: rgba(255, 255, 255, 0.12);
+      width: 84px;
+      height: 56px;
+      padding: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .site-nav.scrolled .brand-mark,
-    .site-nav.menu-open .brand-mark {
-      color: var(--navy);
-      background: var(--blue-soft);
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
     }
 
     .brand-text {
@@ -610,7 +754,7 @@
 
     .docs-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
     }
 
@@ -806,6 +950,7 @@
     }
 
     @media (max-width: 980px) {
+      .coming-soon-rail,
       .quick-grid,
       .services-grid,
       .docs-grid,
@@ -880,7 +1025,8 @@
       .quick-grid,
       .services-grid,
       .docs-grid,
-      .social-grid {
+      .social-grid,
+      .coming-soon-rail {
         grid-template-columns: 1fr;
       }
 
@@ -888,6 +1034,14 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 22px;
+      }
+
+      .coming-soon-screen {
+        padding: 20px;
+      }
+
+      .coming-soon-panel {
+        border-radius: 20px;
       }
 
       .footer {
@@ -903,8 +1057,8 @@
       }
 
       .brand-mark {
-        width: 38px;
-        height: 38px;
+        width: 72px;
+        height: 48px;
       }
 
       .hero h1 {
@@ -915,10 +1069,27 @@
     }
   </style>
 </head>
-<body>
+<body class="coming-soon-active">
+  <!-- Remove `coming-soon-active` from the body tag when the academy is ready to launch. -->
+  <section class="coming-soon-screen" aria-label="Coming soon">
+    <div class="coming-soon-panel">
+      <div class="coming-soon-logo">
+        <img src="assets/banner-logo.jpg" alt="Tampa Success Academy banner logo" />
+      </div>
+      <span class="coming-soon-mark">Tampa Success Academy LLC</span>
+      <h1 class="coming-soon-title">COMING <span>SOON!</span></h1>
+      <p class="coming-soon-sub">Big things are on the way. Tampa Success Academy is preparing to open soon.</p>
+      <div class="coming-soon-note">Empowering today's students to lead tomorrow.</div>
+      <div class="coming-soon-rail" aria-label="Coming soon highlights">
+        <div class="coming-soon-pill">Academic<br />Excellence</div>
+        <div class="coming-soon-pill">Student<br />Growth</div>
+        <div class="coming-soon-pill">Innovation &amp;<br />Leadership</div>
+      </div>
+    </div>
+  </section>
   <header class="site-nav" id="navbar">
     <a class="brand" href="#inicio" aria-label="Tampa Success Academy LLC">
-      <span class="brand-mark">TSA</span>
+      <span class="brand-mark"><img src="assets/banner-logo.jpg" alt="Tampa Success Academy logo" /></span>
       <span class="brand-text">
         <span class="brand-title">Tampa Success Academy</span>
         <span class="brand-sub">Academic Support for Online Students</span>
@@ -1113,16 +1284,6 @@
             </div>
           </article>
 
-          <article class="doc-card reveal">
-            <div class="doc-preview">
-              <img src="assets/untitled_7_d25d898cb04d.png" alt="Student progress tracker preview" />
-            </div>
-            <div class="doc-body">
-              <h3>Progress Tracker</h3>
-              <p>Daily rows for date, student name, check-in percentage, check-out percentage, comments, and signatures.</p>
-              <a class="btn btn-ghost" href="assets/student-progress-tracker.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
-            </div>
-          </article>
         </div>
       </div>
     </section>
