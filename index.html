@@ -823,28 +823,70 @@
       font-size: 0.84rem;
     }
 
+    .forms-payment,
     .forms-mailbox {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 28px;
       max-width: 980px;
       margin: 0 auto 30px;
-      padding: 24px 28px;
+      padding: 28px 30px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: var(--white);
       box-shadow: var(--shadow-sm);
     }
 
+    .forms-payment {
+      margin: 0 auto 36px;
+    }
+
+    .forms-mailbox {
+      margin: 38px auto 18px;
+    }
+
+    .forms-payment-copy,
     .forms-mailbox-copy {
       display: grid;
+      flex: 1 1 420px;
       gap: 10px;
     }
 
+    .forms-payment-copy p,
     .forms-mailbox-copy p {
       color: var(--muted);
       line-height: 1.7;
+    }
+
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      flex: 0 1 500px;
+      gap: 14px;
+      width: min(100%, 500px);
+    }
+
+    .payment-option {
+      min-height: 54px;
+      padding-inline: 18px;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .payment-link-hint {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.65;
+    }
+
+    .payment-option.is-disabled {
+      border-color: var(--line);
+      background: #f3f5f7;
+      color: var(--muted);
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: none;
     }
 
     .forms-email {
@@ -852,14 +894,18 @@
       align-items: center;
       gap: 10px;
       width: fit-content;
-      min-height: 40px;
-      padding: 0 16px;
+      min-height: 42px;
+      padding: 0 18px;
       border-radius: var(--radius);
       background: var(--blue-soft);
       color: var(--navy);
       font-family: "Sora", system-ui, sans-serif;
       font-size: 0.88rem;
       font-weight: 700;
+    }
+
+    .forms-mailbox .btn {
+      min-width: 178px;
     }
 
     .social-grid {
@@ -1022,6 +1068,7 @@
 
       .hero-actions .btn,
       .contact-actions .btn,
+      .forms-payment .btn,
       .forms-mailbox .btn {
         width: 100%;
       }
@@ -1048,10 +1095,20 @@
         grid-template-columns: 1fr;
       }
 
+      .forms-payment,
       .forms-mailbox {
         flex-direction: column;
+      }
+
+      .forms-payment,
+      .forms-mailbox {
         align-items: flex-start;
         padding: 22px;
+      }
+
+      .payment-options {
+        width: 100%;
+        grid-template-columns: 1fr;
       }
 
       .coming-soon-screen {
@@ -1260,14 +1317,6 @@
           </p>
         </div>
 
-        <div class="forms-mailbox reveal">
-          <div class="forms-mailbox-copy">
-            <p>When you finish with the forms send it to the following email</p>
-            <span class="forms-email"><i class="fa-regular fa-envelope" aria-hidden="true"></i> tsaacademyllc@gmail.com</span>
-          </div>
-          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=tsaacademyllc@gmail.com&su=Completed%20TSA%20Forms&body=Hello,%20I%20am%20sending%20the%20completed%20forms." target="_blank" rel="noopener noreferrer">Send with Gmail</a>
-        </div>
-
         <div class="docs-grid">
           <article class="doc-card reveal">
             <div class="doc-preview">
@@ -1302,6 +1351,31 @@
             </div>
           </article>
 
+        </div>
+
+        <div class="forms-mailbox reveal">
+          <div class="forms-mailbox-copy">
+            <p>When you finish with the forms send it to the following email</p>
+            <span class="forms-email"><i class="fa-regular fa-envelope" aria-hidden="true"></i> tsaacademyllc@gmail.com</span>
+          </div>
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&fs=1&to=tsaacademyllc@gmail.com&su=Completed%20TSA%20Forms&body=Hello,%20I%20am%20sending%20the%20completed%20forms." target="_blank" rel="noopener noreferrer">Send with Gmail</a>
+        </div>
+
+        <div class="forms-payment reveal">
+          <div class="forms-payment-copy">
+            <p><strong>Pay</strong></p>
+            <p>Choose the payment method that works best for you.</p>
+          </div>
+          <div class="payment-options">
+            <a class="btn btn-ghost payment-option" id="paypalPaymentLink" href="https://www.paypal.biz/tsaademyllc" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-paypal" aria-hidden="true"></i>
+              <span>PayPal</span>
+            </a>
+            <span class="btn btn-ghost payment-option is-disabled" id="cardCashAppPaymentLink" aria-disabled="true">
+              <i class="fa-regular fa-credit-card" aria-hidden="true"></i>
+              <span>Card &amp; CashApp - In construction</span>
+            </span>
+          </div>
         </div>
       </div>
     </section>
